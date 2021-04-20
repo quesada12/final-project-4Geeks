@@ -1,0 +1,20 @@
+/* AQUI COLOCAMOS TODOS LOS ESTILOS DE LA APP */
+ /* Colores --> https://www.colourlovers.com/palette/95638/Mini_Soccer 
+ 
+ Verde claro: #ECF9CD
+ Verde intermedio: #6AA95A
+ Verde principal: #9DD102
+ Verde Oscuro: #036704
+ Naranja (contraste): #FF6601
+
+ */
+
+/* Fonts a utilizar */
+ @import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@300&display=swap');
+
+ *{
+     font-family: 'Yantramanav', sans-serif;
+     color: #9DD102;
+     background: rgba(235,249,205,0.1);
+ }
+

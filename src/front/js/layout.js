@@ -1,10 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import PrivateRoute from "./privateRoute";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { Login } from "./pages/login";
+import { Register } from "./pages/register";
+import { Canchas } from "./pages/canchas";
+import { Cancha } from "./pages/cancha";
+import { Reservas } from "./pages/reservas";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -22,18 +28,12 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
-						<Route>
-							<h1>Not found!</h1>
-						</Route>
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/register" component={Register} />
+						<PrivateRoute exact path="/" component={Home} />
+						<PrivateRoute exact path="/canchas" component={Canchas} />
+						<PrivateRoute exact path="/cancha/:id" component={Cancha} />
+						<PrivateRoute exact path="/reservas" component={Reservas} />
 					</Switch>
 					<Footer />
 				</ScrollToTop>

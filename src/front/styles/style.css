@@ -9,12 +9,21 @@
 
  */
 
-/* Fonts a utilizar */
- @import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap');
+
 
  *{
-     font-family: 'Yantramanav', sans-serif;
-     color: #9DD102;
-     background: rgba(235,249,205,0.1);
- }
+     font-family: 'Noto Sans JP', sans-serif;
+     
+ } 
+
+body{
+    background: url("../img/backsoccerfield.jpeg");
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 

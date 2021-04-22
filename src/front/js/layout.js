@@ -10,6 +10,7 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Canchas } from "./pages/canchas";
 import { Cancha } from "./pages/cancha";
+import { Template } from "./pages/template";
 import { Reservas } from "./pages/reservas";
 import injectContext from "./store/appContext";
 
@@ -30,7 +31,8 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/register" component={Register} />
-						<PrivateRoute exact path="/" component={Home} />
+						<Route exact path="/" component={Home} />
+						<Route exact path="/template" component={Template} />
 						<PrivateRoute exact path="/canchas" component={Canchas} />
 						<PrivateRoute exact path="/cancha/:id" component={Cancha} />
 						<PrivateRoute exact path="/reservas" component={Reservas} />

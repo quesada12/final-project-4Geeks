@@ -1,3 +1,15 @@
 /* 
     General Styles
 */
+
+$theme-colors: (
+  "verdeClaro": #ECF9CD,
+  "verdeIntermedio": #6AA95A,
+  "verdeOscuro": #036704,
+  "verdePrincipal": #9DD102,
+  "naranjaContraste": #FF6601,
+
+);
+
+
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss"

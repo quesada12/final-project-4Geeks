@@ -3,5 +3,5 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Cancha = props => {
-	return <h1>Hola soy una Cancha</h1>;
+	return <h1>Cancha</h1>;
 };

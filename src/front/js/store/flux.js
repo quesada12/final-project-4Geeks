@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			login: true,
+			login: false,
 			message: null,
 			demo: [
 				{
@@ -14,12 +14,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
+			],
+			usuarios: [
+				{
+					correo: "prueba@prueba.com",
+					password: "pruebaprueba"
+				}
 			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			createInitialVars: () => {
+				sessionStorage.setItem("login", "false");
+			},
+
+			ingresar: () => {
+				let login = true;
+				sessionStorage.setItem("login", "true");
+				setStore({ login: login });
+			},
+
+			salir: () => {
+				let login = false;
+				sessionStorage.setItem("login", "false");
+				setStore({ login: login });
+			},
+
+			login: (correo, password) => {
+				const store = getStore();
+				let res = false;
+				let usuarios = store.usuarios;
+				usuarios.forEach(usuario => {
+					res = usuario.correo === correo && usuario.password === password ? true : false;
+				});
+				return res;
 			},
 
 			getMessage: () => {

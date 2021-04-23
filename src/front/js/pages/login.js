@@ -1,16 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 import loginIMG from "../../img/loginback.jpeg";
 
 export const Login = props => {
+	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(false);
+	const [login, setLogin] = useState(false);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		alert("Correo: " + email + " ,password: " + password);
+		if (actions.login(email, password)) {
+			actions.ingresar();
+			setLogin(true);
+		} else {
+			setError(true);
+		}
 	};
 
 	return (
@@ -60,6 +67,7 @@ export const Login = props => {
 					<img src={loginIMG} className="img-fluid" alt="login" />
 				</div>
 			</div>
+			{login ? <Redirect to="/canchas" /> : null}
 		</div>
 	);
 };

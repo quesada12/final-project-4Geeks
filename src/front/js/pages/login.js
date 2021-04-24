@@ -58,8 +58,12 @@ export const Login = props => {
 								Ingresar
 							</button>
 
-							<h6 className="text-verdeIntermedio">¿Perdiste la contraseña?</h6>
-							<h6 className="text-verdeIntermedio">¿No tienes una cuenta? Regístrate</h6>
+							<Link>
+								<h6 className="text-verdeIntermedio">¿Perdiste la contraseña?</h6>
+							</Link>
+							<Link to="/register">
+								<h6 className="text-verdeIntermedio">¿No tienes una cuenta? Regístrate</h6>
+							</Link>
 						</div>
 					</form>
 				</div>

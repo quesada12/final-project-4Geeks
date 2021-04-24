@@ -38,7 +38,7 @@ export const Navbar = () => {
 								</Link>
 							</DropdownItem>
 							<DropdownItem>
-								<Link to={"/canchas"}>
+								<Link to={"/reservas"}>
 									<button type="button" className="btn btn-link text-dark ">
 										Mis Reservas
 									</button>

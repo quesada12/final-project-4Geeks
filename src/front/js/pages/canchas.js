@@ -149,7 +149,7 @@ export const Canchas = props => {
 			<h1 className="text-verdePrincipal">Canchas Disponibles</h1>
 			<hr />
 			<div className="row d-flex justify-content-around">
-				<div className="col-3">
+				<div className="col-12 col-lg-3 mb-2">
 					<Select
 						options={store.provincias}
 						placeholder="Selecciona Provincia"
@@ -160,7 +160,7 @@ export const Canchas = props => {
 						onChange={provinciaChange}
 					/>
 				</div>
-				<div className="col-3">
+				<div className="col-12 col-lg-3 mb-2">
 					<Select
 						options={listadoCantones}
 						placeholder="Selecciona Canton"
@@ -172,7 +172,7 @@ export const Canchas = props => {
 						onChange={cantonChange}
 					/>
 				</div>
-				<div className="col-3">
+				<div className="col-12 col-lg-3 mb-2">
 					<Select
 						options={listadoDistrito}
 						placeholder="Selecciona Distrito"

@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import DatePicker from "react-date-picker";
 import Select from "react-select";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import MapContainer from "../component/mapContainer";
 
 export const Cancha = props => {
 	const { store, actions } = useContext(Context);
@@ -25,7 +26,9 @@ export const Cancha = props => {
 		distrito: "1",
 		capacidad: "20 personas max",
 		descripcion:
-			"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud"
+			"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+		lat: 9.916875,
+		lng: -84.074835
 	};
 
 	const horas = [{ label: "19:00", value: "19:00" }, { label: "20:00", value: "20:00" }];
@@ -63,7 +66,7 @@ export const Cancha = props => {
 					<img className="img-fluid" src={cancha.img} />
 				</div>
 				<div className="col-12 col-lg-6">
-					<h1>MAPA</h1>
+					<MapContainer lat={cancha.lat} lng={cancha.lng} />
 				</div>
 			</div>
 			<div className="row">

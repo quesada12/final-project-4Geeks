@@ -3,5 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Register = props => {
-	return <h1>Hola soy Register</h1>;
+	return (
+		<div className="container bg-white border rounded py-4 ">
+			<h1 className="text-verdePrincipal">Registro de Usuario</h1>
+			<hr />
+		</div>
+	);
 };

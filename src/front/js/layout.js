@@ -7,6 +7,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Login } from "./pages/login";
+import { Forgot } from "./pages/forgot";
 import { Register } from "./pages/register";
 import { Canchas } from "./pages/canchas";
 import { Cancha } from "./pages/cancha";
@@ -30,6 +31,7 @@ const Layout = () => {
 					<Navbar />
 					<Switch>
 						<Route exact path="/login" component={Login} />
+						<Route exact path="/forgot/:id" component={Forgot} />
 						<Route exact path="/register" component={Register} />
 						<Route exact path="/" component={Home} />
 						<Route exact path="/template" component={Template} />

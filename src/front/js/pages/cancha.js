@@ -12,7 +12,7 @@ export const Cancha = props => {
 	const [valueDate, onChangeD] = useState(new Date());
 	const [valueHour, onChangeH] = useState("");
 	const [modal, setModal] = useState(false);
-
+	const [horasSelect, setHorasSelect] = useState([]);
 	const toggle = () => setModal(!modal);
 
 	const cancha = {
@@ -28,10 +28,27 @@ export const Cancha = props => {
 		descripcion:
 			"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
 		lat: 9.916875,
-		lng: -84.074835
+		lng: -84.074835,
+		horaInicio: 9,
+		horaFin: 21,
+		duracion: 2
 	};
 
-	const horas = [{ label: "19:00", value: "19:00" }, { label: "20:00", value: "20:00" }];
+	useEffect(() => {
+		calcularHorasCancha();
+	}, []);
+
+	const calcularHorasCancha = () => {
+		const horas = [];
+		for (let i = cancha.horaInicio; i <= cancha.horaFin; i = i + cancha.duracion) {
+			const hora = {
+				label: i + ":00",
+				value: i + ":00"
+			};
+			horas.push(hora);
+		}
+		setHorasSelect(horas);
+	};
 
 	const hourChange = selectedOption => {
 		if (selectedOption == null) {
@@ -65,9 +82,7 @@ export const Cancha = props => {
 				<div className="col-12 col-lg-6">
 					<img className="img-fluid" src={cancha.img} />
 				</div>
-				<div className="col-12 col-lg-6">
-					<MapContainer lat={cancha.lat} lng={cancha.lng} />
-				</div>
+				<div className="col-12 col-lg-6">{/* <MapContainer lat={cancha.lat} lng={cancha.lng} /> */}</div>
 			</div>
 			<div className="row">
 				<div className="col-12 col-lg-8">
@@ -102,7 +117,7 @@ export const Cancha = props => {
 					<div className="d-flex mb-3">
 						<h5 className="pt-1 col-3">Hora: </h5>
 						<Select
-							options={horas}
+							options={horasSelect}
 							placeholder="Selecciona Hora"
 							variant="success"
 							isSearchable
@@ -128,8 +143,8 @@ export const Cancha = props => {
 							<ModalHeader toggle={toggle}>Resultado</ModalHeader>
 							<ModalBody>
 								Fecha:{" "}
-								{valueDate.getDate() + "/" + valueDate.getMonth() + "/" + valueDate.getFullYear()} Hora:{" "}
-								{valueHour}{" "}
+								{valueDate.getDate() + "/" + (valueDate.getMonth() + 1) + "/" + valueDate.getFullYear()}{" "}
+								Hora: {valueHour}{" "}
 							</ModalBody>
 							<ModalFooter>
 								{/* <Button color="primary" onClick={toggle}>

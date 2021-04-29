@@ -8,64 +8,94 @@ const getState = ({ getStore, getActions, setStore }) => {
 			distritos: [],
 			canchas: [
 				{
-					id: "1",
+					id: 1,
 					nombre: "Cancha React SJ",
 					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
 					costo: "14000",
 					ubicacion: "100 m O de la Iglesia",
 					provincia: "1",
 					canton: "1",
-					distrito: "1"
+					distrito: "1",
+					capacidad: "20 personas max",
+					descripcion:
+						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+					lat: 9.916875,
+					lng: -82.343312
 				},
 				{
-					id: "2",
+					id: 2,
 					nombre: "Cancha React Alajuela",
 					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
 					costo: "14000",
 					ubicacion: "100 m O de la Iglesia",
 					provincia: "2",
 					canton: "2",
-					distrito: "1"
+					distrito: "1",
+					capacidad: "20 personas max",
+					descripcion:
+						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+					lat: 9.545334,
+					lng: -84.074835
 				},
 				{
-					id: "3",
+					id: 3,
 					nombre: "Cancha React Cartago",
 					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
 					costo: "14000",
 					ubicacion: "100 m O de la Iglesia",
 					provincia: "3",
 					canton: "4",
-					distrito: "1"
+					distrito: "1",
+					capacidad: "20 personas max",
+					descripcion:
+						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+					lat: 9.123452,
+					lng: -84.074835
 				},
 				{
-					id: "4",
+					id: 4,
 					nombre: "Cancha React San Diego",
 					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
 					costo: "14000",
 					ubicacion: "100 m O de la Iglesia",
 					provincia: "3",
 					canton: "3",
-					distrito: "2"
+					distrito: "2",
+					capacidad: "20 personas max",
+					descripcion:
+						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+					lat: 9.916875,
+					lng: -84.948392
 				},
 				{
-					id: "5",
+					id: 5,
 					nombre: "Cancha React San Juan1",
 					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
 					costo: "14000",
 					ubicacion: "100 m O de la Iglesia",
 					provincia: "3",
 					canton: "3",
-					distrito: "3"
+					distrito: "3",
+					capacidad: "20 personas max",
+					descripcion:
+						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+					lat: 9.916875,
+					lng: -84.074835
 				},
 				{
-					id: "6",
+					id: 6,
 					nombre: "Cancha React San Juan2",
 					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
 					costo: "14000",
 					ubicacion: "100 m O de la Iglesia",
 					provincia: "3",
 					canton: "3",
-					distrito: "3"
+					distrito: "3",
+					capacidad: "20 personas max",
+					descripcion:
+						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+					lat: 9.916875,
+					lng: -84.074835
 				}
 			],
 			demo: [
@@ -82,7 +112,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			usuarios: [
 				{
-					correo: "prueba@prueba.com",
+					id: 1,
+					correo: "josue.qu12@gmail.com",
 					password: "pruebaprueba"
 				}
 			]
@@ -233,6 +264,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				return result;
+			},
+			getUserID: email => {
+				const store = getStore();
+				const usuarios = store.usuarios;
+				usuarios.forEach(usuario => {
+					if (usuario.correo === email) {
+						return usuario.id;
+					}
+				});
+				return null;
 			},
 			getMessage: () => {
 				// fetching data from the backend

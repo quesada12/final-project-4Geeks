@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams, Redirect } from "react-router-dom";
+import { Link, useParams, Redirect, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import loginIMG from "../../img/loginback.jpeg";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import emailjs from "emailjs-com";
 
 export const Login = props => {
 	const { store, actions } = useContext(Context);
@@ -9,6 +11,11 @@ export const Login = props => {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(false);
 	const [login, setLogin] = useState(false);
+	const [modal, setModal] = useState(false);
+	const [emailRecovery, setEmailRecovery] = useState(false);
+	const [recoveryValidation, setRecoveryValidation] = useState(true);
+	const toggle = () => setModal(!modal);
+	let history = useHistory();
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -18,6 +25,37 @@ export const Login = props => {
 		} else {
 			setError(true);
 		}
+	};
+
+	const recuperar = e => {
+		let id = null;
+		store.usuarios.forEach(usuario => {
+			if (usuario.correo == emailRecovery) {
+				id = usuario.id;
+			}
+		});
+		console.log(id);
+		if (id != null) {
+			// enviarCodigo();
+			history.push("/forgot/" + id);
+		} else {
+			setRecoveryValidation(false);
+		}
+	};
+
+	const enviarCodigo = () => {
+		let params = {
+			code: "12345",
+			to_email: emailRecovery
+		};
+		emailjs.send("service_h217yzz", "template_skimzoe", params, "user_y2hsW8byOtmtOC16Rr4eF").then(
+			result => {
+				console.log(result.text);
+			},
+			error => {
+				console.log(error.text);
+			}
+		);
 	};
 
 	return (
@@ -59,7 +97,9 @@ export const Login = props => {
 							</button>
 
 							<Link>
-								<h6 className="text-verdeIntermedio">¿Perdiste la contraseña?</h6>
+								<h6 className="text-verdeIntermedio" onClick={e => toggle()}>
+									¿Perdiste la contraseña?
+								</h6>
 							</Link>
 							<Link to="/register">
 								<h6 className="text-verdeIntermedio">¿No tienes una cuenta? Regístrate</h6>
@@ -71,6 +111,44 @@ export const Login = props => {
 					<img src={loginIMG} className="img-fluid" alt="login" />
 				</div>
 			</div>
+
+			{/* MODAL */}
+			<div>
+				<Modal isOpen={modal} toggle={toggle}>
+					<ModalHeader toggle={toggle}>¿Perdiste la contraseña?</ModalHeader>
+					<ModalBody>
+						<div>
+							{!recoveryValidation ? (
+								<div className="alert alert-danger text-center" role="alert">
+									Usuario no registrado
+								</div>
+							) : null}
+
+							<label htmlFor="correoElectronico" className="form-label">
+								Correo Electrónico:{" "}
+							</label>
+							<input
+								type="email"
+								className="form-control"
+								aria-describedby="emailHelp"
+								onChange={e => setEmailRecovery(e.target.value)}
+							/>
+						</div>
+					</ModalBody>
+					<ModalFooter>
+						{/* <Button color="primary" onClick={toggle}>
+									Do Something
+								</Button>{" "} */}
+						<Button color="danger" onClick={toggle}>
+							Cancelar
+						</Button>
+						<Button color="verdeIntermedio" onClick={e => recuperar(e)}>
+							Recuperar
+						</Button>
+					</ModalFooter>
+				</Modal>
+			</div>
+
 			{login ? <Redirect to="/canchas" /> : null}
 		</div>
 	);

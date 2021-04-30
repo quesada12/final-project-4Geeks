@@ -59,8 +59,14 @@ export const Cancha = props => {
 	};
 
 	const handleReservar = e => {
+		const reserva = {
+			id: 12,
+			cancha: cancha.nombre,
+			fecha: valueDate,
+			hora: valueHour
+		};
+		actions.addReserva(reserva);
 		toggle();
-		//alert(valueDate + valueHour);
 	};
 
 	function customTheme(theme) {
@@ -82,7 +88,9 @@ export const Cancha = props => {
 				<div className="col-12 col-lg-6">
 					<img className="img-fluid" src={cancha.img} />
 				</div>
-				<div className="col-12 col-lg-6">{/* <MapContainer lat={cancha.lat} lng={cancha.lng} /> */}</div>
+				<div className="col-12 col-lg-6">
+					<MapContainer lat={cancha.lat} lng={cancha.lng} />
+				</div>
 			</div>
 			<div className="row">
 				<div className="col-12 col-lg-8">
@@ -142,8 +150,15 @@ export const Cancha = props => {
 						<Modal isOpen={modal} toggle={toggle}>
 							<ModalHeader toggle={toggle}>Resultado</ModalHeader>
 							<ModalBody>
-								Fecha:{" "}
-								{valueDate.getDate() + "/" + (valueDate.getMonth() + 1) + "/" + valueDate.getFullYear()}{" "}
+								Reserva Realizada <br />
+								{valueDate != null
+									? "Fecha: " +
+									  valueDate.getDate() +
+									  "/" +
+									  (valueDate.getMonth() + 1) +
+									  "/" +
+									  valueDate.getFullYear()
+									: null}
 								Hora: {valueHour}{" "}
 							</ModalBody>
 							<ModalFooter>

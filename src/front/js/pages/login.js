@@ -36,7 +36,7 @@ export const Login = props => {
 		});
 		console.log(id);
 		if (id != null) {
-			// enviarCodigo();
+			enviarCodigo();
 			history.push("/forgot/" + id);
 		} else {
 			setRecoveryValidation(false);
@@ -45,7 +45,7 @@ export const Login = props => {
 
 	const enviarCodigo = () => {
 		let params = {
-			code: "12345",
+			code: "a8ur7d",
 			to_email: emailRecovery
 		};
 		emailjs.send("service_h217yzz", "template_skimzoe", params, "user_y2hsW8byOtmtOC16Rr4eF").then(

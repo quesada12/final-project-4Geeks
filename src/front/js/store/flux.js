@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			login: true,
+			login: false,
 			message: null,
 			provincias: [],
 			cantones: [],
@@ -96,6 +96,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
 					lat: 9.916875,
 					lng: -84.074835
+				}
+			],
+			reservas: [
+				{
+					id: 1,
+					cancha: "Cancha React SJ",
+					fecha: new Date("2021", "2", "10"),
+					hora: "19:00"
+				},
+				{
+					id: 2,
+					cancha: "Cancha React SJ",
+					fecha: new Date(),
+					hora: "21:00"
+				},
+				{
+					id: 3,
+					cancha: "Cancha React SJ",
+					fecha: new Date("2021", "4", "28"),
+					hora: "21:00"
 				}
 			],
 			demo: [
@@ -274,6 +294,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				return null;
+			},
+			addReserva: reserva => {
+				const store = getStore();
+				const reservas = store.reservas;
+				reservas.push(reserva);
+				setStore({ reservas: reservas });
 			},
 			getMessage: () => {
 				// fetching data from the backend

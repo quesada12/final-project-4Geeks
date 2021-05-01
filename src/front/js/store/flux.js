@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			login: false,
+			login: true,
 			message: null,
 			provincias: [],
 			cantones: [],

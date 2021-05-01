@@ -36,7 +36,7 @@ export const Login = props => {
 		});
 		console.log(id);
 		if (id != null) {
-			enviarCodigo();
+			// enviarCodigo();
 			history.push("/forgot/" + id);
 		} else {
 			setRecoveryValidation(false);

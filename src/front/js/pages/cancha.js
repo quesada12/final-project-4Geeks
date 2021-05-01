@@ -88,9 +88,7 @@ export const Cancha = props => {
 				<div className="col-12 col-lg-6">
 					<img className="img-fluid" src={cancha.img} />
 				</div>
-				<div className="col-12 col-lg-6">
-					<MapContainer lat={cancha.lat} lng={cancha.lng} />
-				</div>
+				<div className="col-12 col-lg-6">{/* <MapContainer lat={cancha.lat} lng={cancha.lng} /> */}</div>
 			</div>
 			<div className="row">
 				<div className="col-12 col-lg-8">

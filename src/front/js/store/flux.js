@@ -1,102 +1,103 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			api_url: process.env.BACKEND_URL,
 			login: true,
 			message: null,
 			provincias: [],
 			cantones: [],
 			distritos: [],
 			canchas: [
-				{
-					id: 1,
-					nombre: "Cancha React SJ",
-					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
-					costo: "14000",
-					ubicacion: "100 m O de la Iglesia",
-					provincia: "1",
-					canton: "1",
-					distrito: "1",
-					capacidad: "20 personas max",
-					descripcion:
-						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
-					lat: 9.916875,
-					lng: -82.343312
-				},
-				{
-					id: 2,
-					nombre: "Cancha React Alajuela",
-					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
-					costo: "14000",
-					ubicacion: "100 m O de la Iglesia",
-					provincia: "2",
-					canton: "2",
-					distrito: "1",
-					capacidad: "20 personas max",
-					descripcion:
-						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
-					lat: 9.545334,
-					lng: -84.074835
-				},
-				{
-					id: 3,
-					nombre: "Cancha React Cartago",
-					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
-					costo: "14000",
-					ubicacion: "100 m O de la Iglesia",
-					provincia: "3",
-					canton: "4",
-					distrito: "1",
-					capacidad: "20 personas max",
-					descripcion:
-						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
-					lat: 9.123452,
-					lng: -84.074835
-				},
-				{
-					id: 4,
-					nombre: "Cancha React San Diego",
-					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
-					costo: "14000",
-					ubicacion: "100 m O de la Iglesia",
-					provincia: "3",
-					canton: "3",
-					distrito: "2",
-					capacidad: "20 personas max",
-					descripcion:
-						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
-					lat: 9.916875,
-					lng: -84.948392
-				},
-				{
-					id: 5,
-					nombre: "Cancha React San Juan1",
-					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
-					costo: "14000",
-					ubicacion: "100 m O de la Iglesia",
-					provincia: "3",
-					canton: "3",
-					distrito: "3",
-					capacidad: "20 personas max",
-					descripcion:
-						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
-					lat: 9.916875,
-					lng: -84.074835
-				},
-				{
-					id: 6,
-					nombre: "Cancha React San Juan2",
-					img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
-					costo: "14000",
-					ubicacion: "100 m O de la Iglesia",
-					provincia: "3",
-					canton: "3",
-					distrito: "3",
-					capacidad: "20 personas max",
-					descripcion:
-						"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
-					lat: 9.916875,
-					lng: -84.074835
-				}
+				// {
+				// 	id: 1,
+				// 	nombre: "Cancha React SJ",
+				// 	img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
+				// 	costo: "14000",
+				// 	ubicacion: "100 m O de la Iglesia",
+				// 	provincia: "1",
+				// 	canton: "1",
+				// 	distrito: "1",
+				// 	capacidad: "20 personas max",
+				// 	descripcion:
+				// 		"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+				// 	lat: 9.916875,
+				// 	lng: -82.343312
+				// },
+				// {
+				// 	id: 2,
+				// 	nombre: "Cancha React Alajuela",
+				// 	img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
+				// 	costo: "14000",
+				// 	ubicacion: "100 m O de la Iglesia",
+				// 	provincia: "2",
+				// 	canton: "2",
+				// 	distrito: "1",
+				// 	capacidad: "20 personas max",
+				// 	descripcion:
+				// 		"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+				// 	lat: 9.545334,
+				// 	lng: -84.074835
+				// },
+				// {
+				// 	id: 3,
+				// 	nombre: "Cancha React Cartago",
+				// 	img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
+				// 	costo: "14000",
+				// 	ubicacion: "100 m O de la Iglesia",
+				// 	provincia: "3",
+				// 	canton: "4",
+				// 	distrito: "1",
+				// 	capacidad: "20 personas max",
+				// 	descripcion:
+				// 		"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+				// 	lat: 9.123452,
+				// 	lng: -84.074835
+				// },
+				// {
+				// 	id: 4,
+				// 	nombre: "Cancha React San Diego",
+				// 	img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
+				// 	costo: "14000",
+				// 	ubicacion: "100 m O de la Iglesia",
+				// 	provincia: "3",
+				// 	canton: "3",
+				// 	distrito: "2",
+				// 	capacidad: "20 personas max",
+				// 	descripcion:
+				// 		"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+				// 	lat: 9.916875,
+				// 	lng: -84.948392
+				// },
+				// {
+				// 	id: 5,
+				// 	nombre: "Cancha React San Juan1",
+				// 	img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
+				// 	costo: "14000",
+				// 	ubicacion: "100 m O de la Iglesia",
+				// 	provincia: "3",
+				// 	canton: "3",
+				// 	distrito: "3",
+				// 	capacidad: "20 personas max",
+				// 	descripcion:
+				// 		"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+				// 	lat: 9.916875,
+				// 	lng: -84.074835
+				// },
+				// {
+				// 	id: 6,
+				// 	nombre: "Cancha React San Juan2",
+				// 	img: "https://www.larepublica.net/storage/images/2020/10/19/20201019133032.cancha.jpg",
+				// 	costo: "14000",
+				// 	ubicacion: "100 m O de la Iglesia",
+				// 	provincia: "3",
+				// 	canton: "3",
+				// 	distrito: "3",
+				// 	capacidad: "20 personas max",
+				// 	descripcion:
+				// 		"Cancha de Fut5 y Fut7 con amplío parqueo, cumplimos con todos los requerimientos del Ministerio de Salud",
+				// 	lat: 9.916875,
+				// 	lng: -84.074835
+				// }
 			],
 			reservas: [
 				{
@@ -146,6 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createInitialVars: () => {
 				sessionStorage.setItem("login", "false");
+				sessionStorage.setItem("user", "1");
 			},
 
 			ingresar: () => {
@@ -307,6 +309,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
+			},
+			getCanchas: () => {
+				fetch(process.env.BACKEND_URL + "/api/cancha")
+					.then(resp => resp.json())
+					.then(data => setStore({ canchas: data }))
+					.catch(error => console.log("Error loading canchas from backend", error));
 			},
 			changeColor: (index, color) => {
 				//get the store

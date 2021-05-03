@@ -8,6 +8,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Login } from "./pages/login";
 import { Forgot } from "./pages/forgot";
+import { Success } from "./pages/success";
 import { Register } from "./pages/register";
 import { Canchas } from "./pages/canchas";
 import { Cancha } from "./pages/cancha";
@@ -33,12 +34,13 @@ const Layout = () => {
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/forgot/:id" component={Forgot} />
 						<Route exact path="/register" component={Register} />
-						{/* <Route exact path="/" component={Home} /> */}
-						<PrivateRoute exact path="/" component={Canchas} />
+						<Route exact path="/" component={Home} />
+						{/* <PrivateRoute exact path="/" component={Canchas} /> */}
 						<Route exact path="/template" component={Template} />
 						<PrivateRoute exact path="/canchas" component={Canchas} />
 						<PrivateRoute exact path="/cancha/:id" component={Cancha} />
 						<PrivateRoute exact path="/reservas" component={Reservas} />
+						<PrivateRoute exact path="/success" component={Success} />
 					</Switch>
 					<Footer />
 				</ScrollToTop>

@@ -16,6 +16,21 @@ export const Reservas = props => {
 		}
 	};
 
+	const getReservas = async () => {
+		let reservas = [];
+		await fetch(store.api_url + "/api/user/" + sessionStorage.getItem("user") + "/reservas", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => res.json())
+			.then(data => (reservas = data))
+			.catch(err => console.error(err));
+		console.log(reservas);
+		return reservas;
+	};
+
 	useEffect(
 		() => {
 			const hoy = new Date();
@@ -23,7 +38,7 @@ export const Reservas = props => {
 				setReservas("0");
 			} else {
 				if (filtro == 1) {
-					setReservas(store.reservas);
+					setReservas(getReservas());
 				} else {
 					if (filtro == 2) {
 						setReservas(
@@ -52,7 +67,7 @@ export const Reservas = props => {
 			return (
 				<tr key={index}>
 					<th scope="row">{reserva.id}</th>
-					<td>{reserva.cancha}</td>
+					<td>{reserva.cancha_id}</td>
 					<td>
 						{reserva.fecha.getDate() +
 							"/" +

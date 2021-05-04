@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			api_url: process.env.BACKEND_URL,
-			login: true,
+			login: false,
 			message: null,
 			provincias: [],
 			cantones: [],
@@ -147,18 +147,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createInitialVars: () => {
 				sessionStorage.setItem("login", "false");
-				sessionStorage.setItem("user", "1");
+				sessionStorage.setItem("user", "0");
 			},
 
-			ingresar: () => {
+			ingresar: user => {
 				let login = true;
 				sessionStorage.setItem("login", "true");
+				sessionStorage.setItem("user", user);
 				setStore({ login: login });
 			},
 
 			salir: () => {
 				let login = false;
 				sessionStorage.setItem("login", "false");
+				sessionStorage.setItem("user", "0");
 				setStore({ login: login });
 			},
 

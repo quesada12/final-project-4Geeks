@@ -22,6 +22,8 @@ export const Cancha = props => {
 	const toggleC = () => setModalC(!modalC);
 	const [cancha, setCancha] = useState({});
 	let history = useHistory();
+	let la = "9.929291";
+	let lo = "-84.094679";
 
 	useEffect(() => {
 		fetch(store.api_url + "/api/cancha/" + params.id, {
@@ -83,7 +85,8 @@ export const Cancha = props => {
 		const reserva = {
 			cancha_id: params.id,
 			fecha: valueDate,
-			hora: valueHour
+			hora: valueHour,
+			cancha_nombre: cancha.nombre
 		};
 		fetch(store.api_url + "/api/user/" + sessionStorage.getItem("user") + "/reservas", {
 			method: "POST",
@@ -139,7 +142,10 @@ export const Cancha = props => {
 				<div className="col-12 col-lg-6">
 					<img className="img-fluid" src={cancha.img} />
 				</div>
-				<div className="col-12 col-lg-6">{/* <MapContainer lat={cancha.lat} lng={cancha.lng} /> */}</div>
+				<div className="col-12 col-lg-6">
+					{/* {cancha != undefined ? <MapContainer lat={cancha.lat} lng={cancha.lng} /> : null} */}
+					{/* <MapContainer lat={la} lng={lo} /> */}
+				</div>
 			</div>
 			<div className="row">
 				<div className="col-12 col-lg-8">
@@ -176,7 +182,6 @@ export const Cancha = props => {
 							options={horasSelect}
 							placeholder="Selecciona Hora"
 							variant="success"
-							isSearchable
 							isClearable
 							theme={customTheme}
 							className="col-8"

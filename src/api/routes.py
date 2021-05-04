@@ -6,8 +6,8 @@ from api.models import db, User, Cancha, Reserva
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
-api = Blueprint('api', __name__)
 
+api = Blueprint('api', __name__)
 
 
 
@@ -67,7 +67,18 @@ def login():
     else:
         return jsonify({"msj":"todo mal"}),401
 
-
+@api.route('/update', methods=['PUT'])
+def update_password():
+    user_id = request.json.get("user_id",None)
+    codigoVerificacion = request.json.get("codigoVerificacion",None)
+    password = request.json.get("password",None)
+    user = User.query.filter_by(id=user_id,codigoVerificacion=codigoVerificacion).first()
+    if user is None:
+        raise APIException('User not found', status_code=404)
+    else:
+        user.password = password
+        db.session.commit()
+        return jsonify({"user":"ok"}),200
 
 #---------------------------  CANCHA ENDPOINTS ---------------------------------------------
 
@@ -96,7 +107,7 @@ def get_user_reservas(id):
     if user is None:
         raise APIException('User not found', status_code=404)
 
-    return jsonify(user.serializeReservas(),200)
+    return jsonify(user.serializeReservas()),200
 
 @api.route('/user/<int:id>/reservas', methods=['POST'])
 def create_reserva(id):
@@ -104,11 +115,13 @@ def create_reserva(id):
     cancha_id= request.json.get("cancha_id",None)
     fecha= request.json.get("fecha",None)
     hora= request.json.get("hora",None)
+    cancha_nombre = request.json.get("cancha_nombre",None)
     new_reserva = Reserva()
     new_reserva.user_id= user_id
     new_reserva.cancha_id=cancha_id,
     new_reserva.fecha=fecha,
     new_reserva.hora=hora
+    new_reserva.cancha_nombre=cancha_nombre
     db.session.add(new_reserva)
     db.session.commit()
     return jsonify({"msj":"Reserva creada exitosamente"}),200

@@ -35,6 +35,7 @@ class User(db.Model):
     
     def serializeCode(self):
         return{
+            "id":self.id,
             "codigoVerificacion":self.codigoVerificacion
         }
 

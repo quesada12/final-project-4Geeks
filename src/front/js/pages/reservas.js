@@ -7,6 +7,35 @@ export const Reservas = props => {
 	const { store, actions } = useContext(Context);
 	const [filtro, setFiltro] = useState("0");
 	const [reservas, setReservas] = useState("0");
+	const [reservasF, setReservasF] = useState([]);
+
+	useEffect(() => {
+		let reservas = [];
+		fetch(store.api_url + "/api/user/" + sessionStorage.getItem("user") + "/reservas", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => res.json())
+			.then(data => formatJSON(data.reservas))
+			.catch(err => console.error(err));
+	}, []);
+
+	const formatJSON = reservas => {
+		let lista = [];
+		reservas.forEach(reserva => {
+			let r = {};
+			r.id = reserva.id;
+			r.cancha_nombre = reserva.cancha_nombre;
+			r.cancha_id = reserva.cancha_id;
+			r.hora = reserva.hora;
+			r.fecha = new Date(Date.parse(reserva.fecha));
+			lista.push(r);
+			console.log(r);
+		});
+		setReservasF(lista);
+	};
 
 	const filtroChange = selectedOption => {
 		if (selectedOption == null) {
@@ -16,21 +45,6 @@ export const Reservas = props => {
 		}
 	};
 
-	const getReservas = async () => {
-		let reservas = [];
-		await fetch(store.api_url + "/api/user/" + sessionStorage.getItem("user") + "/reservas", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(data => (reservas = data))
-			.catch(err => console.error(err));
-		console.log(reservas);
-		return reservas;
-	};
-
 	useEffect(
 		() => {
 			const hoy = new Date();
@@ -38,18 +52,18 @@ export const Reservas = props => {
 				setReservas("0");
 			} else {
 				if (filtro == 1) {
-					setReservas(getReservas());
+					setReservas(reservasF);
 				} else {
 					if (filtro == 2) {
 						setReservas(
-							store.reservas.filter(reserva => {
-								return reserva.fecha < hoy;
+							reservasF.filter(reserva => {
+								return reserva.fecha <= hoy;
 							})
 						);
 					} else {
 						if (filtro == 3) {
 							setReservas(
-								store.reservas.filter(reserva => {
+								reservasF.filter(reserva => {
 									return reserva.fecha >= hoy;
 								})
 							);
@@ -67,13 +81,15 @@ export const Reservas = props => {
 			return (
 				<tr key={index}>
 					<th scope="row">{reserva.id}</th>
-					<td>{reserva.cancha_id}</td>
+					<td>{reserva.cancha_nombre}</td>
 					<td>
 						{reserva.fecha.getDate() +
+							1 +
 							"/" +
 							(reserva.fecha.getMonth() + 1) +
 							"/" +
 							reserva.fecha.getFullYear()}
+						{/* {reserva.fecha} */}
 					</td>
 					<td>{reserva.hora}</td>
 				</tr>
@@ -106,7 +122,6 @@ export const Reservas = props => {
 					]}
 					placeholder="Selecciona "
 					variant="success"
-					isSearchable
 					isClearable
 					theme={customTheme}
 					className="col-4"

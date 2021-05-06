@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import logo from "../../img/logorent4.png";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
@@ -11,7 +12,8 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-light bg-verdeIntermedio mb-3 border-bottom ">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1 text-white">Reservas Canchas</span>
+				{/* <span className="navbar-brand mb-0 h1 text-white">Reservas Canchas</span> */}
+				<img src={logo} width="170px" />
 			</Link>
 
 			<ul className="navbar-nav me-auto mb-2 mb-lg-0">

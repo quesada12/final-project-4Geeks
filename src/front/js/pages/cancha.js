@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import DatePicker from "react-date-picker";
 import Select from "react-select";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import MapContainer from "../component/mapContainer";
+import MapContenedor from "../component/mapContenedor";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
@@ -22,11 +22,15 @@ export const Cancha = props => {
 	const toggleC = () => setModalC(!modalC);
 	const [cancha, setCancha] = useState({});
 	let history = useHistory();
-	let la = "9.929291";
-	let lo = "-84.094679";
+	const [la, setLa] = useState("0");
+	const [lo, setLo] = useState("0");
 
 	useEffect(() => {
-		fetch(store.api_url + "/api/cancha/" + params.id, {
+		carga();
+	}, []);
+
+	const carga = async () => {
+		await fetch(store.api_url + "/api/cancha/" + params.id, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -36,9 +40,12 @@ export const Cancha = props => {
 			.then(data => {
 				setCancha(data);
 				calcularHorasCancha(data.horaInicio, data.horaFin, data.duracion);
+				setLa(data.lat);
+				setLo(data.lng);
+				actions.addCoordenadas(data.lat, data.lng);
 			})
 			.catch(err => console.error(err));
-	}, []);
+	};
 
 	const calcularHorasCancha = (horaInicio, horaFin, duracion) => {
 		const horas = [];
@@ -143,8 +150,11 @@ export const Cancha = props => {
 					<img className="img-fluid" src={cancha.img} />
 				</div>
 				<div className="col-12 col-lg-6">
-					{/* {cancha != undefined ? <MapContainer lat={cancha.lat} lng={cancha.lng} /> : null} */}
-					{/* <MapContainer lat={la} lng={lo} /> */}
+					{/* <MapContainer lat="9.913920" lng="-84.074832" /> */}
+
+					{/* {cancha != undefined ? <MapContainer lat={la} lng={lo} /> : null} */}
+
+					<MapContenedor />
 				</div>
 			</div>
 			<div className="row">

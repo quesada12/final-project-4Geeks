@@ -1,26 +1,40 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import PropTypes from "prop-types";
 
+import { Context } from "../store/appContext";
+
 export class MapContainer extends Component {
+	static contextType = Context;
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			selectedPlace: {
 				name: "Prueba"
-			}
+			},
+			lat: "",
+			lon: "",
+			user: ""
 		};
+	}
+	componentDidMount() {
+		this.state.user = this.context;
 	}
 
 	render() {
-		console.log(this.props);
+		// const { store, actions } = useContext(Context);
+		console.log(this.state.user);
+
 		return (
 			<Map
 				google={this.props.google}
 				zoom={14}
 				initialCenter={{
-					lat: this.props.lat,
-					lng: this.props.lng
+					// lat: this.props.lat,
+					// lng: this.props.lng
+					lat: this.state.user.lat,
+					lng: this.state.user.lon
 				}}>
 				<Marker onClick={this.onMarkerClick} name={"Current location"} />
 

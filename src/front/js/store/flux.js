@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			api_url: process.env.BACKEND_URL,
-			login: false,
+			login: true,
 			message: null,
 			provincias: [],
 			cantones: [],
@@ -137,7 +137,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					correo: "josue.qu12@gmail.com",
 					password: "pruebaprueba"
 				}
-			]
+			],
+			lat: "",
+			lon: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -147,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createInitialVars: () => {
 				sessionStorage.setItem("login", "false");
-				sessionStorage.setItem("user", "0");
+				sessionStorage.setItem("user", "1");
 			},
 
 			ingresar: user => {
@@ -304,6 +306,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const reservas = store.reservas;
 				reservas.push(reserva);
 				setStore({ reservas: reservas });
+			},
+			addCoordenadas: (lat, lon) => {
+				const store = getStore();
+				setStore({ lat: lat });
+				setStore({ lon: lon });
 			},
 			getMessage: () => {
 				// fetching data from the backend

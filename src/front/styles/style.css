@@ -26,4 +26,21 @@ body{
     background-size: cover;
 }
 
+/* Propiedades de jumbotron landing page */
+.big-banner{
+    background-image: url("https://images.pexels.com/photos/2128220/pexels-photo-2128220.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    height: 100%;
+    /* background-attachment: fixed; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+/* Propiedades de jumbotron mapa */
+.big-banner-map{
+    background-image: url("https://www.nacion.com/gnfactory/especiales/infografias/2020/marzo/comparatives/here002.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

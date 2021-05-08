@@ -5,13 +5,11 @@ import { Context } from "../store/appContext";
 
 const MapContenedor = props => {
 	const { store, actions } = useContext(Context);
-	console.log(store.lat);
-	console.log(store.lon);
 	return (
 		<div>
 			<Map
 				google={props.google}
-				zoom={14}
+				zoom={15}
 				initialCenter={{
 					lat: store.lat,
 					lng: store.lon

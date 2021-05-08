@@ -22,8 +22,6 @@ export const Cancha = props => {
 	const toggleC = () => setModalC(!modalC);
 	const [cancha, setCancha] = useState({});
 	let history = useHistory();
-	const [la, setLa] = useState("0");
-	const [lo, setLo] = useState("0");
 
 	useEffect(() => {
 		carga();
@@ -40,8 +38,6 @@ export const Cancha = props => {
 			.then(data => {
 				setCancha(data);
 				calcularHorasCancha(data.horaInicio, data.horaFin, data.duracion);
-				setLa(data.lat);
-				setLo(data.lng);
 				actions.addCoordenadas(data.lat, data.lng);
 			})
 			.catch(err => console.error(err));
@@ -150,10 +146,6 @@ export const Cancha = props => {
 					<img className="img-fluid" src={cancha.img} />
 				</div>
 				<div className="col-12 col-lg-6">
-					{/* <MapContainer lat="9.913920" lng="-84.074832" /> */}
-
-					{/* {cancha != undefined ? <MapContainer lat={la} lng={lo} /> : null} */}
-
 					<MapContenedor />
 				</div>
 			</div>

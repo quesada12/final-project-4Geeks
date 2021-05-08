@@ -48,7 +48,7 @@ export const Navbar = () => {
 							</DropdownItem>
 							<DropdownItem divider />
 							<DropdownItem>
-								<Link to={"/canchas"}>
+								<Link to={"/"}>
 									<button
 										type="button"
 										className="btn btn-link text-dark "

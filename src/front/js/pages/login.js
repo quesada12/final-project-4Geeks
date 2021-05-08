@@ -56,6 +56,11 @@ export const Login = props => {
 			.catch(err => console.error(err));
 	};
 
+	const toggleRec = e => {
+		setRecoveryValidation(true);
+		toggle();
+	};
+
 	const recuperar = e => {
 		fetch(store.api_url + "/api/user/" + emailRecovery, {
 			method: "GET",
@@ -76,7 +81,7 @@ export const Login = props => {
 		})
 			.then(res => res.json())
 			.then(data => {
-				// enviarCodigo(data.codigoVerificacion);
+				enviarCodigo(data.codigoVerificacion);
 				history.push("/forgot/" + data.id);
 			})
 			.catch(err => console.error(err));
@@ -136,7 +141,7 @@ export const Login = props => {
 							</button>
 
 							<Link>
-								<h6 className="text-verdeIntermedio" onClick={e => toggle()}>
+								<h6 className="text-verdeIntermedio" onClick={e => toggleRec(e)}>
 									¿Perdiste la contraseña?
 								</h6>
 							</Link>

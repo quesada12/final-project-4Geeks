@@ -28,6 +28,15 @@ def get_all_users():
     all_users = list(map(lambda x: x.serialize(), result))
     return jsonify(all_users), 200
 
+@api.route('/user/<int:id>',methods=['GET'])
+def get_user(id):
+    user= User.query.get(id)
+
+    if user is None:
+        raise APIException('User not found', status_code=404)
+
+    return jsonify(user.serialize()), 200
+
 @api.route('/user/<string:email>', methods=['GET'])
 def get_code(email):
     usuario = User.query.filter_by(email=email).first()

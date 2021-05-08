@@ -3,6 +3,7 @@ import { Link, useParams, Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 import loginIMG from "../../img/backregister.jpeg";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import emailjs from "emailjs-com";
 
 export const Register = props => {
 	const { store, actions } = useContext(Context);
@@ -52,6 +53,7 @@ export const Register = props => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
+		setAlert(false);
 		if (name == "" && lastname == "" && birthdate == "" && password == "" && password2 == "") {
 			toggle();
 		} else {
@@ -70,12 +72,31 @@ export const Register = props => {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(res => (res.ok ? toggleB() : toggleC()))
+					.then(res => (res.ok ? successReg() : toggleC()))
 					.catch(err => console.error(err));
 			} else {
 				setAlert(true);
 			}
 		}
+	};
+
+	const successReg = () => {
+		correoBienvenida();
+		toggleB();
+	};
+
+	const correoBienvenida = () => {
+		let params = {
+			to_email: email
+		};
+		emailjs.send("service_h217yzz", "template_5x21yjk", params, "user_y2hsW8byOtmtOC16Rr4eF").then(
+			result => {
+				console.log(result.text);
+			},
+			error => {
+				console.log(error.text);
+			}
+		);
 	};
 
 	return (

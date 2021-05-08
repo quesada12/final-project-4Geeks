@@ -21,6 +21,7 @@ export const Cancha = props => {
 	const toggleB = () => setModalB(!modalB);
 	const toggleC = () => setModalC(!modalC);
 	const [cancha, setCancha] = useState({});
+	const [mapa, setMapa] = useState("cargando...");
 	let history = useHistory();
 
 	useEffect(() => {
@@ -41,6 +42,11 @@ export const Cancha = props => {
 				actions.addCoordenadas(data.lat, data.lng);
 			})
 			.catch(err => console.error(err));
+		setMapa(dibujarMapa());
+	};
+
+	const dibujarMapa = () => {
+		return <MapContenedor />;
 	};
 
 	const calcularHorasCancha = (horaInicio, horaFin, duracion) => {
@@ -145,9 +151,7 @@ export const Cancha = props => {
 				<div className="col-12 col-lg-6">
 					<img className="img-fluid" src={cancha.img} />
 				</div>
-				<div className="col-12 col-lg-6">
-					<MapContenedor />
-				</div>
+				<div className="col-12 col-lg-6">{mapa}</div>
 			</div>
 			<div className="row">
 				<div className="col-12 col-lg-8">

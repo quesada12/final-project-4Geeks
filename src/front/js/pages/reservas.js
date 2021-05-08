@@ -2,12 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Select from "react-select";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import emailjs from "emailjs-com";
 
 export const Reservas = props => {
 	const { store, actions } = useContext(Context);
 	const [filtro, setFiltro] = useState("0");
 	const [reservas, setReservas] = useState("0");
 	const [reservasF, setReservasF] = useState([]);
+
+	const [id, setId] = useState("");
+	const [cancha, setCancha] = useState("");
+	const [fecha, setFecha] = useState("");
+	const [hora, setHora] = useState("");
+	const [modal, setModal] = useState(false);
+	const [email, setEmail] = useState("");
+	const [error, setError] = useState(false);
+	const toggle = () => setModal(!modal);
 
 	useEffect(() => {
 		let reservas = [];
@@ -32,7 +43,6 @@ export const Reservas = props => {
 			r.hora = reserva.hora;
 			r.fecha = new Date(Date.parse(reserva.fecha));
 			lista.push(r);
-			console.log(r);
 		});
 		setReservasF(lista);
 	};
@@ -80,7 +90,9 @@ export const Reservas = props => {
 		reservasMap = reservas.map((reserva, index) => {
 			return (
 				<tr key={index}>
-					<th scope="row">{reserva.id}</th>
+					<th scope="row" className="text-center">
+						{reserva.id}
+					</th>
 					<td>{reserva.cancha_nombre}</td>
 					<td>
 						{reserva.fecha.getDate() +
@@ -92,6 +104,15 @@ export const Reservas = props => {
 						{/* {reserva.fecha} */}
 					</td>
 					<td>{reserva.hora}</td>
+					<td className="text-center">
+						<button
+							className="btn btn-verdeIntermedio"
+							onClick={e =>
+								compartirReserva(e, reserva.id, reserva.cancha_nombre, reserva.fecha, reserva.hora)
+							}>
+							Compartir Reserva
+						</button>
+					</td>
 				</tr>
 			);
 		});
@@ -107,6 +128,39 @@ export const Reservas = props => {
 			}
 		};
 	}
+
+	const compartirReserva = (e, id, cancha, fecha, hora) => {
+		setId(id);
+		setCancha(cancha);
+		setFecha(fecha.getDate() + 1 + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear());
+		setHora(hora);
+		toggle();
+	};
+
+	const enviarCorreo = e => {
+		if (email == "") {
+			setError(true);
+		} else {
+			setError(false);
+			let params = {
+				to_email: email,
+				reserva_id: id,
+				cancha_nombre: cancha,
+				fecha: fecha,
+				hora: hora
+			};
+			emailjs.send("service_h217yzz", "template_mp40jvr", params, "user_y2hsW8byOtmtOC16Rr4eF").then(
+				result => {
+					console.log(result.text);
+					toggle();
+				},
+				error => {
+					console.log(error.text);
+					toggle();
+				}
+			);
+		}
+	};
 
 	return (
 		<div className="jumbotron mx-5 bg-white border py-4 ">
@@ -133,15 +187,52 @@ export const Reservas = props => {
 				<table className="table table-hover">
 					<thead>
 						<tr className="table-verdePrincipal">
-							<th scope="col">Reserva ID</th>
+							<th scope="col" className="text-center">
+								Reserva ID
+							</th>
 							<th scope="col">Cancha</th>
 							<th scope="col">Fecha</th>
 							<th scope="col">Hora</th>
+							<th scope="col" />
 						</tr>
 					</thead>
 					<tbody>{reservasMap}</tbody>
 				</table>
 			) : null}
+
+			{/* MODAL */}
+			<div>
+				<Modal isOpen={modal} toggle={toggle}>
+					<ModalHeader toggle={toggle}>Compartir Reserva</ModalHeader>
+					<ModalBody>
+						{error ? (
+							<div className="alert alert-naranjaContraste text-center" role="alert">
+								Correo Electrónico erróneo
+							</div>
+						) : null}
+
+						<div className="mb-3">
+							<label htmlFor="correoElectronico" className="form-label">
+								Correo Electrónico:{" "}
+							</label>
+							<input
+								type="email"
+								className="form-control"
+								aria-describedby="emailHelp"
+								onChange={e => setEmail(e.target.value)}
+							/>
+						</div>
+					</ModalBody>
+					<ModalFooter>
+						<Button color="danger" onClick={toggle}>
+							Cancelar
+						</Button>{" "}
+						<Button color="verdeIntermedio" onClick={e => enviarCorreo(e)}>
+							Enviar
+						</Button>
+					</ModalFooter>
+				</Modal>
+			</div>
 		</div>
 	);
 };

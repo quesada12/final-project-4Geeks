@@ -18,7 +18,7 @@ export const CardCancha = props => {
 	return (
 		<div className="col-lg-4 col-12">
 			<div className="card m-2 text-dark ">
-				<img src={props.img} className="card-img-top" alt="..." />
+				<img src={props.img} height="250px" className="card-img-top" alt="..." />
 				<div className="card-header">
 					<h4 className="card-title text-verdeOscuro">{props.nombre}</h4>
 				</div>

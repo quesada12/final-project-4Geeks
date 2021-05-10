@@ -23,12 +23,14 @@ def handle_hello():
 #---------------------------  USER ENDPOINTS ---------------------------------------------
 
 @api.route('/user', methods=['GET'])
+@jwt_required()
 def get_all_users():
     result= User.query.all()
     all_users = list(map(lambda x: x.serialize(), result))
     return jsonify(all_users), 200
 
 @api.route('/user/<int:id>',methods=['GET'])
+@jwt_required()
 def get_user(id):
     user= User.query.get(id)
 
@@ -72,7 +74,8 @@ def login():
     password= request.json.get("password",None)
     user = User.query.filter_by(email=email,password=password).first()
     if user:
-        return jsonify({"user":user.id}),200
+        access_token = create_access_token(identity=user.id)
+        return jsonify({"token":access_token,"user":user.id}),200
     else:
         return jsonify({"msj":"todo mal"}),401
 
@@ -98,6 +101,7 @@ def get_all_canchas():
     return jsonify(all_canchas), 200
 
 @api.route('/cancha/<int:id>',methods=['GET'])
+@jwt_required()
 def get_cancha(id):
     cancha= Cancha.query.get(id)
 
@@ -110,6 +114,7 @@ def get_cancha(id):
 #---------------------------  RESERVA ENDPOINTS ---------------------------------------------
 
 @api.route('/user/<int:id>/reservas', methods=['GET'])
+@jwt_required()
 def get_user_reservas(id):
     user = User.query.get(id)
 
@@ -119,6 +124,7 @@ def get_user_reservas(id):
     return jsonify(user.serializeReservas()),200
 
 @api.route('/user/<int:id>/reservas', methods=['POST'])
+@jwt_required()
 def create_reserva(id):
     user_id = id
     cancha_id= request.json.get("cancha_id",None)
@@ -137,6 +143,7 @@ def create_reserva(id):
 
 
 @api.route('/reserva', methods=['POST'])
+@jwt_required()
 def look_reserva():
     cancha_id= request.json.get("cancha_id",None)
     fecha= request.json.get("fecha",None)
@@ -149,6 +156,7 @@ def look_reserva():
     
 
 @api.route('/reserva', methods=['GET'])
+@jwt_required()
 def get_all_reservas():
     result= Reserva.query.all()
     all_reservas = list(map(lambda x: x.serialize(), result))

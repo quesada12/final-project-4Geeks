@@ -31,10 +31,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.setItem("user", "0");
 			},
 
-			ingresar: user => {
+			ingresar: (user, token) => {
 				let login = true;
 				sessionStorage.setItem("login", "true");
 				sessionStorage.setItem("user", user);
+				sessionStorage.setItem("token", token);
 				setStore({ login: login });
 			},
 
@@ -42,6 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let login = false;
 				sessionStorage.setItem("login", "false");
 				sessionStorage.setItem("user", "0");
+				sessionStorage.setItem("token", "0");
 				setStore({ login: login });
 			},
 

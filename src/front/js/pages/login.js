@@ -50,7 +50,7 @@ export const Login = props => {
 		})
 			.then(res => res.json())
 			.then(data => {
-				actions.ingresar(data.user);
+				actions.ingresar(data.user, data.token);
 				setLogin(true);
 			})
 			.catch(err => console.error(err));

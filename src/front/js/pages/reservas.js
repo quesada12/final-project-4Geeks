@@ -25,7 +25,8 @@ export const Reservas = props => {
 		fetch(store.api_url + "/api/user/" + sessionStorage.getItem("user") + "/reservas", {
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + sessionStorage.getItem("token")
 			}
 		})
 			.then(res => res.json())

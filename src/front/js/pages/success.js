@@ -11,7 +11,8 @@ export const Success = props => {
 		fetch(store.api_url + "/api/user/" + sessionStorage.getItem("user"), {
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + sessionStorage.getItem("token")
 			}
 		})
 			.then(res => res.json())

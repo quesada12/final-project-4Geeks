@@ -32,7 +32,8 @@ export const Cancha = props => {
 		await fetch(store.api_url + "/api/cancha/" + params.id, {
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + sessionStorage.getItem("token")
 			}
 		})
 			.then(res => res.json())
@@ -80,7 +81,8 @@ export const Cancha = props => {
 				method: "POST",
 				body: JSON.stringify(reserva),
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
+					Authorization: "Bearer " + sessionStorage.getItem("token")
 				}
 			})
 				.then(res => (res.ok ? toggle() : toggleB()))
@@ -101,7 +103,8 @@ export const Cancha = props => {
 			method: "POST",
 			body: JSON.stringify(reserva),
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + sessionStorage.getItem("token")
 			}
 		})
 			.then(res => (res.ok ? history.push("/success") : null))

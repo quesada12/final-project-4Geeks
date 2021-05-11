@@ -19,33 +19,77 @@ export const Login = props => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		if (actions.login(email, password)) {
-			actions.ingresar();
-			setLogin(true);
-		} else {
-			setError(true);
-		}
+		const body = {
+			email: email,
+			password: password
+		};
+
+		fetch(store.api_url + "/api/login", {
+			method: "POST",
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => (res.ok ? successfulLogin() : setError(true)))
+			.catch(err => console.error(err));
+	};
+
+	const successfulLogin = () => {
+		const body = {
+			email: email,
+			password: password
+		};
+
+		fetch(store.api_url + "/api/login", {
+			method: "POST",
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => res.json())
+			.then(data => {
+				actions.ingresar(data.user, data.token);
+				setLogin(true);
+			})
+			.catch(err => console.error(err));
+	};
+
+	const toggleRec = e => {
+		setRecoveryValidation(true);
+		toggle();
 	};
 
 	const recuperar = e => {
-		let id = null;
-		store.usuarios.forEach(usuario => {
-			if (usuario.correo == emailRecovery) {
-				id = usuario.id;
+		fetch(store.api_url + "/api/user/" + emailRecovery, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
 			}
-		});
-		console.log(id);
-		if (id != null) {
-			// enviarCodigo();
-			history.push("/forgot/" + id);
-		} else {
-			setRecoveryValidation(false);
-		}
+		})
+			.then(res => (res.ok ? forgetPage() : setRecoveryValidation(false)))
+			.catch(err => console.error(err));
 	};
 
-	const enviarCodigo = () => {
+	const forgetPage = () => {
+		fetch(store.api_url + "/api/user/" + emailRecovery, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => res.json())
+			.then(data => {
+				enviarCodigo(data.codigoVerificacion);
+				history.push("/forgot/" + data.id);
+			})
+			.catch(err => console.error(err));
+	};
+
+	const enviarCodigo = codigo => {
 		let params = {
-			code: "a8ur7d",
+			code: codigo,
 			to_email: emailRecovery
 		};
 		emailjs.send("service_h217yzz", "template_skimzoe", params, "user_y2hsW8byOtmtOC16Rr4eF").then(
@@ -97,7 +141,7 @@ export const Login = props => {
 							</button>
 
 							<Link>
-								<h6 className="text-verdeIntermedio" onClick={e => toggle()}>
+								<h6 className="text-verdeIntermedio" onClick={e => toggleRec(e)}>
 									¿Perdiste la contraseña?
 								</h6>
 							</Link>

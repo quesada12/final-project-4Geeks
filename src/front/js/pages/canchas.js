@@ -30,7 +30,6 @@ export const Canchas = props => {
 			/>
 		);
 	});
-
 	// PROVINCIAS
 	const provinciaChange = selectedOption => {
 		if (selectedOption == null) {

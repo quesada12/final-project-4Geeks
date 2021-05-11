@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import logo from "../../img/logorent4.png";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
@@ -9,12 +10,13 @@ export const Navbar = () => {
 	const toggle = () => setDropdownOpen(prevState => !prevState);
 
 	return (
-		<nav className="navbar navbar-light bg-verdeIntermedio mb-3 border-bottom ">
+		<nav className="navbar navbar-light bg-verdeIntermedio mb-1  border-bottom ">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1 text-white">Reservas Canchas</span>
+				{/* <span className="navbar-brand mb-0 h1 text-white">Reservas Canchas</span> */}
+				<img src={logo} width="170px" />
 			</Link>
 
-			<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+			{/* <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 				<Link to="/template">
 					<li className="nav-item">
 						<a className="nav-link active" aria-current="page" href="#">
@@ -22,7 +24,7 @@ export const Navbar = () => {
 						</a>
 					</li>
 				</Link>
-			</ul>
+			</ul> */}
 			<div className="ml-auto pr-5">
 				{store.login ? (
 					<Dropdown isOpen={dropdownOpen} toggle={toggle}>
@@ -46,7 +48,7 @@ export const Navbar = () => {
 							</DropdownItem>
 							<DropdownItem divider />
 							<DropdownItem>
-								<Link to={"/canchas"}>
+								<Link to={"/"}>
 									<button
 										type="button"
 										className="btn btn-link text-dark "

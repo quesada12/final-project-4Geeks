@@ -80,7 +80,7 @@ export const Home = () => {
 				</div>
 				<div>
 					<hr />
-					<h1 className="text-verdeOscuro mb-3 mt-3">Canchas cerca de ti</h1>
+					{/* <h1 className="text-verdeOscuro mb-3 mt-3">Canchas cerca de ti</h1> */}
 				</div>
 			</div>
 

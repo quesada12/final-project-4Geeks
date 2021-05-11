@@ -13,7 +13,7 @@ export const Home = () => {
 				<div className="container">
 					<div className="row align-items-center">
 						<div className="col">
-							<div className="col-4">
+							<div className="col-12 col-lg-4">
 								<h1 className="display-5 text-white">Reservá tu cancha al instante</h1>
 								<p className="text-white">
 									Explorá las canchas disponibles en tu ciudad en tiempo real
@@ -90,8 +90,8 @@ export const Home = () => {
 				<div className="container">
 					<div className="row align-items-center">
 						<div className="col">
-							<div className="col-6">
-								<h1 className="display-5 text-white">Mirá las canchas dispobibles en tu localidad</h1>
+							<div className="col-12 col-lg-6">
+								<h1 className="display-5 text-white">Mirá las canchas disponibles en tu localidad</h1>
 								{/* <p>Explorá las canchas disponibles en tu ciudad en tiempo real</p> */}
 								<Link to="/canchas">
 									<button className="btn btn-naranjaContraste btn-lg">¡Haz tu reserva!</button>

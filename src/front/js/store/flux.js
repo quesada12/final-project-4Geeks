@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const api_url = "https://api-rent-sports.herokuapp.com/";
 	return {
 		store: {
-			api_url: process.env.BACKEND_URL,
+			api_url: "https://api-rent-sports.herokuapp.com/",
 			login: false,
 			message: null,
 			provincias: [],
@@ -195,13 +196,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getMessage: () => {
 				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
+				fetch(api_url + "/api/hello")
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 			getCanchas: () => {
-				fetch(process.env.BACKEND_URL + "/api/cancha")
+				fetch(api_url + "/api/cancha")
 					.then(resp => resp.json())
 					.then(data => setStore({ canchas: data }))
 					.catch(error => console.log("Error loading canchas from backend", error));
